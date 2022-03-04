@@ -10,7 +10,9 @@ public class CameraFollow : MonoBehaviour
     private Vector3 cameraOffset = new Vector3(0,0,-10);
     public float cutOff;
     public float speed;
-    public float startx, endx;
+    public float startx = 0;
+    public float endx = 100;
+    private float midpoint => (endx-startx)/2;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,5 +26,13 @@ public class CameraFollow : MonoBehaviour
         else if (curPos.x > transform.position.x - cutOff && curPos.x > lastPos.x) transform.position += Vector3.right * speed * 0.5f * Time.deltaTime;
         transform.position = Vector3.right * Mathf.Clamp(transform.position.x, startx, endx) + cameraOffset;
         lastPos = curPos;
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireCube(Vector3.right * (startx+midpoint), new Vector3(midpoint*2, 8)); //temp value 8
+        Gizmos.DrawLine(new Vector3(transform.position.x, 4), new Vector3(transform.position.x, -4));
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(new Vector3(transform.position.x - cutOff, 4), new Vector3(transform.position.x - cutOff, -4));
     }
 }
