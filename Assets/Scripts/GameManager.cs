@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        ResetGame();
     }
 
     // Update is called once per frame
@@ -80,7 +80,12 @@ public class GameManager : MonoBehaviour
     {
         if (currentGameState == GameState.playing)
         {
-            gameTime -= 0.4f * Time.deltaTime;
+            GameTime -= 0.4f * Time.deltaTime;
+
+            if (GameTime < 0)
+            {
+                KillPlayer();
+            }
         }
     }
 
@@ -189,10 +194,24 @@ public class GameManager : MonoBehaviour
         currentPlayerState = PlayerState.dead;
         Lives -= 1;
 
+        if (Lives < 0)
+        {
+            GameOver();
+        }
+        else
+        {
+            RestartLevel();
+        }
+
         foreach (Listener listener in listenerList)
         {
             listener.OnPlayerStateChanged();
         }
+    }
+
+    public static void RestartLevel()
+    {
+        LevelManager.RestartLevel();
     }
 
 }
