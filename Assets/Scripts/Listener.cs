@@ -54,6 +54,11 @@ public class Listener : MonoBehaviour
 
     }
 
+    public virtual void OnLevelRestarted()
+    {
+
+    }
+
     /*public virtual void OnTimeChange()
     {
 
