@@ -134,6 +134,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Methods that control player state
+
     public static void PickUpMushroom()
     {
         currentPlayerState = PlayerState.mushroom;
