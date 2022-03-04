@@ -4,7 +4,20 @@ using UnityEngine;
 
 public class Listener : MonoBehaviour
 {
-    // Start is called before the first frame update
+    /*
+     * Updating any variables will call the appropriate listener function
+     * CurrentPlayuerState and CurrentGameState are read-only: use the following methods to manipulate them
+     * GameManager.StartGame();
+     * GameManager.GameOver();
+     * GameManager.GameWin();
+     * GameManager.ResetGame();
+     * GameManager.PickPpMushroom();
+     * GameManager.PickUpFireFlower();
+     * GameManager.PickUpStar();
+     * GameManager.PlayerHurt();
+     * GameManager.KillPlayer();
+     */
+
 
     public virtual void OnGameStart()
     {
@@ -40,4 +53,9 @@ public class Listener : MonoBehaviour
     {
 
     }
+
+    /*public virtual void OnTimeChange()
+    {
+
+    }*/
 }
