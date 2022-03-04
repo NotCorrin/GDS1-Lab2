@@ -240,6 +240,13 @@ public class GameManager : MonoBehaviour
         }
 
 
+        currentPlayerState = PlayerState.normal;
+
+        foreach (Listener listener in listenerList)
+        {
+            listener.OnPlayerStateChanged();
+        }
+
     }
 
 }
