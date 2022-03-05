@@ -2,33 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMove : MonoBehaviour
 {
-    public float jumpspeed = 1, acc = 1, maxfallspeed = 1, speed = 5, runspeed = 8.5f, curmaxspeed;
+    public float gravity = 1, jumpspeed = 1, maxfallspeed = 1.5f, acc = 1, speed = 5, runspeed = 8.5f, curmaxspeed;
+    public Vector2 curspeed;
     public float move;
     public bool grounded;
-    public Rigidbody2D rb;
-    public bool capoff;
+    public SpriteRenderer rend;
+    public BoxCollider2D col;
     // Start is called before the first frame update
     void Update()
     {
-        curmaxspeed = speed;
+        curmaxspeed = (Input.GetKey(KeyCode.LeftShift)?speed:runspeed);
         move = Input.GetAxisRaw("Horizontal");
-        rb.AddForce(move * acc * Vector3.right * Time.deltaTime, ForceMode2D.Impulse);
-        //if(Mathf.Sign(curspeed.x) > curmaxspeed || (move == 0 && Mathf.Sign(curspeed.x) > Time.deltaTime * acc)) curspeed.x -= Time.deltaTime * Mathf.Sign(curspeed.x) * acc;
-        rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -curmaxspeed, curmaxspeed), Mathf.Clamp(rb.velocity.y, -maxfallspeed, jumpspeed));
+        curspeed.x += move * acc * curmaxspeed;
+        if(Mathf.Abs(curspeed.x) > curmaxspeed || (move == 0 && Mathf.Abs(curspeed.x) > Time.deltaTime * acc)) 
+        {
+            curspeed.x -= Mathf.Sign(curspeed.x) * acc * 0.5f;
+            if(Mathf.Abs(curspeed.x) < acc) curspeed.x = 0;
+        }
+        curspeed.x = Mathf.Clamp(curspeed.x, -curmaxspeed, curmaxspeed);
+        if(grounded == false) curspeed.y -= gravity;
         if(Input.GetKeyDown(KeyCode.W) && grounded == true)
         {
-            rb.AddForce(jumpspeed * Vector2.up, ForceMode2D.Impulse);
+            curspeed.y = jumpspeed;
             grounded = false;
         }
-        if((Input.GetKeyUp(KeyCode.W) || rb.velocity.y < 0) && grounded == false) capoff = true;
-        if(capoff) rb.AddForce(Vector2.down * 5);
+        curspeed.y = Mathf.Clamp(curspeed.y, -maxfallspeed, jumpspeed);
+        transform.position += (Vector3)curspeed * Time.deltaTime;
+        while(Physics2D.OverlapBox((Vector2)transform.position + col.offset, col.size * transform.localScale, 0))
+        {
+            curspeed.y = 0;
+            grounded = true;
+            transform.position += Vector3.up * 0.02f;           
+        }
     }
-    void OnCollisionEnter2D()
+    void LateUpdate()
     {
-        grounded = true;
-        capoff = false;
+        rend.flipX = curspeed.x < 0;
     }
 }
