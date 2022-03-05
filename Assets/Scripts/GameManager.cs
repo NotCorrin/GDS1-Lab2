@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public enum GameState { start, playing, gameOver, gameWin };
+    public enum GameState { start, playing, paused, gameOver, gameWin };
     static private GameState currentGameState;
     static public GameState CurrentGameState
     {
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        ResetGame();
     }
 
     // Update is called once per frame
@@ -80,7 +80,12 @@ public class GameManager : MonoBehaviour
     {
         if (currentGameState == GameState.playing)
         {
-            gameTime -= 0.4f * Time.deltaTime;
+            GameTime -= 0.4f * Time.deltaTime;
+
+            if (GameTime < 0)
+            {
+                KillPlayer();
+            }
         }
     }
 
@@ -95,6 +100,7 @@ public class GameManager : MonoBehaviour
     static public void StartGame()
     {
         currentGameState = GameState.playing;
+        Time.timeScale = 1;
 
         gameTime = 400.0f;
 
@@ -127,10 +133,33 @@ public class GameManager : MonoBehaviour
     static public void ResetGame()
     {
         currentGameState = GameState.start;
+        Time.timeScale = 1;
 
         foreach (Listener listener in listenerList)
         {
             listener.OnGameReset();
+        }
+    }
+
+    static public void PauseGame()
+    {
+        currentGameState = GameState.paused;
+        Time.timeScale = 0;
+
+        foreach (Listener listener in listenerList)
+        {
+            listener.OnGameReset();
+        }
+    }
+
+    static public void RestartLevel()
+    {
+        currentGameState = GameState.paused;
+        Time.timeScale = 1;
+
+        foreach (Listener listener in listenerList)
+        {
+            listener.OnLevelRestarted();
         }
     }
 
@@ -187,12 +216,37 @@ public class GameManager : MonoBehaviour
     public static void KillPlayer()
     {
         currentPlayerState = PlayerState.dead;
-        Lives -= 1;
+
+        PauseGame();
 
         foreach (Listener listener in listenerList)
         {
             listener.OnPlayerStateChanged();
         }
+    }
+
+    public static void Respawn()
+    {
+        Lives -= 1;
+
+        if (Lives < 0)
+        {
+            GameOver();
+        }
+        else
+        {
+            RestartLevel();
+            StartGame();
+        }
+
+
+        currentPlayerState = PlayerState.normal;
+
+        foreach (Listener listener in listenerList)
+        {
+            listener.OnPlayerStateChanged();
+        }
+
     }
 
 }

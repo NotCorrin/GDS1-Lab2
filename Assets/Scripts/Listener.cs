@@ -16,6 +16,8 @@ public class Listener : MonoBehaviour
      * GameManager.PickUpStar();
      * GameManager.PlayerHurt();
      * GameManager.KillPlayer();
+     * GameManager.RestartLevel();
+     * GameManager.Respawn();
      */
 
 
@@ -39,6 +41,16 @@ public class Listener : MonoBehaviour
 
     }
 
+    public virtual void OnLevelRestarted()
+    {
+
+    }
+
+    public virtual void OnGamePaused()
+    {
+
+    }
+
     public virtual void OnScoreChange()
     {
 
@@ -53,7 +65,6 @@ public class Listener : MonoBehaviour
     {
 
     }
-
     /*public virtual void OnTimeChange()
     {
 
