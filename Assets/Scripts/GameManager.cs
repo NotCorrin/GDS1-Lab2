@@ -41,10 +41,43 @@ public class GameManager : MonoBehaviour
         get => lives;
         set
         {
-            lives = value;
+            if (lives > value)
+            {
+                lives = value;
+                foreach (Listener listener in listenerList)
+                {
+                    listener.OnLifeLost();
+                }
+            }
+            else
+            {
+                lives = value;
+                foreach (Listener listener in listenerList)
+                {
+                    listener.OnLifeGet();
+                }
+            }
+
+        }
+    }
+
+    static private int coins;
+    static private int coinLives;
+    static public int Coins
+    {
+        get => coins;
+        set
+        {
+            coins = value;
             foreach (Listener listener in listenerList)
             {
-                listener.OnLifeChange();
+                listener.OnCoinGet();
+            }
+
+            if (coins > (coinLives+1) * 100)
+            {
+                coinLives++;
+                Lives++;
             }
         }
     }
@@ -95,6 +128,10 @@ public class GameManager : MonoBehaviour
         listenerList.Add(listener);
     }
 
+    static public void RemoveListener(Listener listener)
+    {
+        listenerList.Remove(listener);
+    }
 
     //Methods which set game state
     static public void StartGame()
@@ -133,6 +170,11 @@ public class GameManager : MonoBehaviour
     static public void ResetGame()
     {
         currentGameState = GameState.start;
+        coinLives = 0;
+        coins = 0;
+        lives = 3;
+        score = 0;
+        ResetPlayer();
         Time.timeScale = 1;
 
         foreach (Listener listener in listenerList)
@@ -225,6 +267,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public static void ResetPlayer()
+    {
+        currentPlayerState = PlayerState.normal;
+
+        foreach (Listener listener in listenerList)
+        {
+            listener.OnPlayerStateChanged();
+        }
+    }
+
     public static void Respawn()
     {
         Lives -= 1;
@@ -239,14 +291,7 @@ public class GameManager : MonoBehaviour
             StartGame();
         }
 
-
-        currentPlayerState = PlayerState.normal;
-
-        foreach (Listener listener in listenerList)
-        {
-            listener.OnPlayerStateChanged();
-        }
-
+        ResetPlayer();
     }
 
 }
