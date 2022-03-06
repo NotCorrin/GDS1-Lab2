@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     public float moveSpeed;
     public bool runOffEdge = true;
@@ -15,44 +15,70 @@ public class Enemy : MonoBehaviour
     public LayerMask groundLayer;
     public Transform turnAroundCheckPoint;
     public Transform edgeCheckPoint;
+    public float distActivationFromCamera = 5;
 
     private bool facingLeft;
+    private bool activated = false;
     private float turnCheckRange = 0.02f;
     private float edgeCheckRange = 0.02f;
+    private float distToCamera;
 
     private Rigidbody2D rb;
     private Collider2D col;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Move();
+        // Grab the x distance from the camera
+        distToCamera = transform.position.x - Camera.main.transform.position.x;
+
+        // Calculate the distance to the edge of the camera
+        float screenRatio = (float)Screen.width / (float)Screen.height;
+        float widthOrtho = Camera.main.orthographicSize * screenRatio;
+
+        // If the enemy is within a certain distance to the camera
+        if(distToCamera - widthOrtho < distActivationFromCamera) {
+            activated = true;
+		}
+
+        // Move if activated
+        if (activated == true) {
+            Move();
+        }
     }
 
     protected virtual void Move() {
+        // Check if there is a ground ahead of the enemy
         bool groundAhead = Physics2D.OverlapCircle(edgeCheckPoint.position, edgeCheckRange, groundLayer);
+        
+        // If there IS ground ahead of the enemy...
+        // runOffEdge if true, flip if its not
         if (groundAhead == false && !runOffEdge) {
             Flip();
         }
 
+        // Check if there is a wall/enemy/pipe infront of the enemy
         bool turnAround = Physics2D.OverlapCircle(turnAroundCheckPoint.position, turnCheckRange, turnAroundLayer);
-		if (turnAround) {
+        // If there is... flip
+        if (turnAround) {
             Flip();
         }
 
+        // The current velocity
         rb.velocity = new Vector3(-moveSpeed, rb.velocity.y, 0);
 
     }
 
     private void Flip() {
+        // If called, reverse 'facingLeft'
         facingLeft = !facingLeft;
+        
+        // and flip the sprite and moveSpeed
 		if (facingLeft) {
             graphicsTransform.localScale = new Vector3(-graphicsTransform.localScale.x, graphicsTransform.localScale.y, graphicsTransform.localScale.z);
             moveSpeed = -moveSpeed;
@@ -61,4 +87,5 @@ public class Enemy : MonoBehaviour
             moveSpeed = -moveSpeed;
         }
     }
+    protected abstract void OnHit();
 }

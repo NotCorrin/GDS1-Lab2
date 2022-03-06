@@ -172,6 +172,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goomba (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4571487413144313415, guid: cb5d265cfb3b44d47be267f406865f47, type: 3}
+      propertyPath: runOffEdge
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8822501321205920267, guid: cb5d265cfb3b44d47be267f406865f47, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -804,6 +808,10 @@ PrefabInstance:
     - target: {fileID: 2224831454344522244, guid: cb5d265cfb3b44d47be267f406865f47, type: 3}
       propertyPath: m_Name
       value: Goomba (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4571487413144313415, guid: cb5d265cfb3b44d47be267f406865f47, type: 3}
+      propertyPath: runOffEdge
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8822501321205920267, guid: cb5d265cfb3b44d47be267f406865f47, type: 3}
       propertyPath: m_RootOrder

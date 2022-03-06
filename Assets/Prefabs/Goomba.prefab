@@ -105,6 +105,7 @@ MonoBehaviour:
     m_Bits: 32
   turnAroundCheckPoint: {fileID: 5778034952804374665}
   edgeCheckPoint: {fileID: 4522306517201405136}
+  distActivationFromCamera: 5
 --- !u!1 &6081379219921773916
 GameObject:
   m_ObjectHideFlags: 0
