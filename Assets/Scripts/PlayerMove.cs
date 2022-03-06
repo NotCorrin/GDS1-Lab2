@@ -16,6 +16,7 @@ public class PlayerMove : MonoBehaviour
     private SpriteRenderer rend;
     private bool capoff;
     private bool facing;
+    public float someRadius = 0.5f;
     // Start is called before the first frame update
     void Update()
     {
@@ -43,18 +44,38 @@ public class PlayerMove : MonoBehaviour
         //jump
         if(Input.GetKeyDown(KeyCode.W) && grounded == true)
         {
-            rb.AddForce((jumpspeed + Mathf.Pow(Mathf.Abs(rb.velocity.x), 2f)) * Vector2.up, ForceMode2D.Impulse);
+            rb.AddForce((jumpspeed + Mathf.Pow(Mathf.Abs(rb.velocity.x), 1.6f)) * Vector2.up * 0.5f, ForceMode2D.Impulse);
+            Invoke("Jump", Time.deltaTime);
             grounded = false;
         }
         if((Input.GetKeyUp(KeyCode.W) || rb.velocity.y < 0) && grounded == false) capoff = true;
         if(capoff) {
-            rb.AddForce(Vector2.down * 4);
+            rb.AddForce(Vector2.down * 6);
             if(rb.velocity.y > 0)rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.9f);
         }
     }
     void LateUpdate()
     {
+            Vector3 pos = transform.position;
+
+    float screenRatio = (float)Screen.width/(float)Screen.height;
+    float widthOrtho = Camera.main.orthographicSize * screenRatio;
+
+    // Checks if the current pos is at the left of the camera
+    Debug.Log(-widthOrtho);
+
+    if(pos.x - someRadius < Camera.main.transform.position.x-widthOrtho){
+        pos.x = Camera.main.transform.position.x-widthOrtho + someRadius;
+        if(rb.velocity.x < 0)rb.velocity = new Vector2(0, rb.velocity.y);
+    }
+
+    transform.position = pos;
+
         rend.flipX = !facing;
+    }
+    void Jump()
+    {
+        rb.AddForce((jumpspeed + Mathf.Pow(Mathf.Abs(rb.velocity.x), 1.6f)) * Vector2.up * 0.5f, ForceMode2D.Impulse);
     }
     void OnCollisionEnter2D(Collision2D collision)
     {

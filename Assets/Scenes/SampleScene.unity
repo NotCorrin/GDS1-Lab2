@@ -660,6 +660,7 @@ MonoBehaviour:
   grounded: 0
   rb: {fileID: 1795597719}
   rend: {fileID: 1795597713}
+  someRadius: 0.25
 --- !u!199 &1795597717
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -5451,7 +5452,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: 1167fb79fdc2fee4580ec97f0ae5f132, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!1 &1950183063
 GameObject:
