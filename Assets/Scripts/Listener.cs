@@ -75,6 +75,16 @@ public class Listener : MonoBehaviour
     {
 
     }
+
+    public virtual void OnPlayerGetStar()
+    {
+
+    }
+
+    public virtual void OnPlayerLoseStar()
+    {
+
+    }
     /*public virtual void OnTimeChange()
     {
 
