@@ -85,5 +85,11 @@ public class PlayerMove : MonoBehaviour
             grounded = true;
         }
         capoff = false;
+
+        if (collision.gameObject.tag == "Mushroom")
+        {
+            Destroy(collision.gameObject);
+            GameManager.PickUpMushroom();
+        }
     }
 }
