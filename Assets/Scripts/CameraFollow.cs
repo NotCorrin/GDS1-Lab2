@@ -13,17 +13,18 @@ public class CameraFollow : MonoBehaviour
     public float startx = 0;
     public float endx = 100;
     private float midpoint => (endx-startx)/2;
+    private PlayerMove player;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        player = FindObjectOfType<PlayerMove>();
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
         if(curPos.x > transform.position.x) transform.position = curPos + cameraOffset;
-        else if (curPos.x > transform.position.x - cutOff && curPos.x > lastPos.x) transform.position += Vector3.right * speed * 0.5f * Time.deltaTime;
+        else if (curPos.x > transform.position.x - cutOff && curPos.x > lastPos.x) transform.position += Vector3.right * player.curmaxspeed * 0.5f * Time.deltaTime;
         transform.position = Vector3.right * Mathf.Clamp(transform.position.x, startx, endx) + cameraOffset;
         lastPos = curPos;
     }
