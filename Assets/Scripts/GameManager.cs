@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    static private List<Listener> listenerList;
+    static private List<Listener> listenerList = new List<Listener>();
 
     public enum GameState { start, playing, paused, gameOver, gameWin };
     static private GameState currentGameState;

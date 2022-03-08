@@ -9,13 +9,9 @@ public class UIManager : Listener
     [SerializeField] GameObject coinsUI;
     [SerializeField] GameObject timeUI;
 
-    void Awake()
-    {
-        GameManager.AddListener(this);
-
-    }
     void Start()
     {
+        GameManager.AddListener(this);
 
         if (!scoreUI)
         {
