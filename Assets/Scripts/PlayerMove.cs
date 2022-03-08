@@ -56,20 +56,7 @@ public class PlayerMove : MonoBehaviour
     }
     void LateUpdate()
     {
-            Vector3 pos = transform.position;
 
-    float screenRatio = (float)Screen.width/(float)Screen.height;
-    float widthOrtho = Camera.main.orthographicSize * screenRatio;
-
-    // Checks if the current pos is at the left of the camera
-    Debug.Log(-widthOrtho);
-
-    if(pos.x - someRadius < Camera.main.transform.position.x-widthOrtho){
-        pos.x = Camera.main.transform.position.x-widthOrtho + someRadius;
-        if(rb.velocity.x < 0)rb.velocity = new Vector2(0, rb.velocity.y);
-    }
-
-    transform.position = pos;
 
         rend.flipX = !facing;
     }
@@ -80,7 +67,6 @@ public class PlayerMove : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         float height = collision.contacts[1].point.y;
-        if(collision.contacts[0].point.y == height && height < transform.position.y)
         {
             grounded = true;
         }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    static private List<Listener> listenerList = new List<Listener>();
+
     public enum GameState { start, playing, paused, gameOver, gameWin };
     static private GameState currentGameState;
     static public GameState CurrentGameState
@@ -12,17 +14,51 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public enum PlayerState { normal, mushroom, fireflower, star, dead };
+    public enum PlayerState { normal, mushroom, fireflower, dead };
     static private PlayerState currentPlayerState;
     static public PlayerState CurrentPlayerState
     {
         get => currentPlayerState;
+        private set
+        {
+            currentPlayerState = value;
+
+            foreach (Listener listener in listenerList)
+            {
+                listener.OnPlayerStateChanged();
+            }
+        }
     }
 
-    static private List<Listener> listenerList = new List<Listener>();
+    static private bool isStarred;
+    static public bool IsStarred
+    {
+        get => isStarred;
+        private set
+        {
+            isStarred = value;
+
+            if (isStarred)
+            {
+                foreach (Listener listener in listenerList)
+                {
+                    listener.OnPlayerGetStar();
+                }
+            }
+            else
+            {
+                foreach (Listener listener in listenerList)
+                {
+                    listener.OnPlayerLoseStar();
+                }
+            }
+        }
+    }
+
+    static private float starTime;
 
     static private int score; //Property for score
-    public int Score
+    static public int Score
     {
         get => score;
         set
@@ -113,7 +149,12 @@ public class GameManager : MonoBehaviour
     {
         if (currentGameState == GameState.playing)
         {
-            GameTime -= 0.4f * Time.deltaTime;
+            GameTime -= Time.deltaTime/ 0.4f;
+
+            if (IsStarred && starTime > GameTime)
+            {
+                IsStarred = false;
+            }
 
             if (GameTime < 0)
             {
@@ -137,7 +178,7 @@ public class GameManager : MonoBehaviour
     static public void StartGame()
     {
         currentGameState = GameState.playing;
-        Time.timeScale = 1;
+        ResumeGame();
 
         gameTime = 400.0f;
 
@@ -185,12 +226,29 @@ public class GameManager : MonoBehaviour
 
     static public void PauseGame()
     {
-        currentGameState = GameState.paused;
-        Time.timeScale = 0;
-
-        foreach (Listener listener in listenerList)
+        if (currentGameState == GameState.playing)
         {
-            listener.OnGameReset();
+            currentGameState = GameState.paused;
+            Time.timeScale = 0;
+
+            foreach (Listener listener in listenerList)
+            {
+                listener.OnGamePaused();
+            }
+        }
+    }
+
+    static public void ResumeGame()
+    {
+        if (currentGameState == GameState.paused)
+        {
+            currentGameState = GameState.playing;
+            Time.timeScale = 1;
+
+            foreach (Listener listener in listenerList)
+            {
+                listener.OnGameResumed();
+            }
         }
     }
 
@@ -210,36 +268,16 @@ public class GameManager : MonoBehaviour
     public static void PickUpMushroom()
     {
         currentPlayerState = PlayerState.mushroom;
-
-        foreach (Listener listener in listenerList)
-        {
-            listener.OnPlayerStateChanged();
-        }
     }
 
     public static void PickUpFireFlower()
     {
-        if (currentPlayerState == PlayerState.mushroom)
-        {
-            currentPlayerState = PlayerState.fireflower; 
-        }
-        
-        else currentPlayerState = PlayerState.mushroom;
-
-        foreach (Listener listener in listenerList)
-        {
-            listener.OnPlayerStateChanged();
-        }
     }
 
     public static void PickUpStar()
     {
-        currentPlayerState = PlayerState.star;
-
-        foreach (Listener listener in listenerList)
-        {
-            listener.OnPlayerStateChanged();
-        }
+        IsStarred = true;
+        starTime = GameTime - 22.5f; //GameTime - 9/0.4 seconds
     }
 
     public static void PickUpOneUp()
@@ -252,11 +290,6 @@ public class GameManager : MonoBehaviour
         if (currentPlayerState == PlayerState.fireflower || currentPlayerState == PlayerState.mushroom)
         {
             currentPlayerState = PlayerState.normal;
-
-            foreach (Listener listener in listenerList)
-            {
-                listener.OnPlayerStateChanged();
-            }
         }
         else if (currentPlayerState == PlayerState.normal)
         {
@@ -270,21 +303,11 @@ public class GameManager : MonoBehaviour
         currentPlayerState = PlayerState.dead;
 
         PauseGame();
-
-        foreach (Listener listener in listenerList)
-        {
-            listener.OnPlayerStateChanged();
-        }
     }
 
     public static void ResetPlayer()
     {
         currentPlayerState = PlayerState.normal;
-
-        foreach (Listener listener in listenerList)
-        {
-            listener.OnPlayerStateChanged();
-        }
     }
 
     public static void Respawn()
