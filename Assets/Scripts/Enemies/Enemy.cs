@@ -4,8 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
-public abstract class Enemy : MonoBehaviour
-{
+public abstract class Enemy : MonoBehaviour {
     public float moveSpeed;
     public bool runOffEdge = true;
     public bool startFacingLeft = true;
@@ -19,12 +18,17 @@ public abstract class Enemy : MonoBehaviour
 
     private bool facingLeft;
     private bool activated = false;
-    private float turnCheckRange = 0.02f;
-    private float edgeCheckRange = 0.02f;
+    private float turnCheckRange = 0.019f;
+    private float edgeCheckRange = 0.019f;
     private float distToCamera;
 
-    private Rigidbody2D rb;
-    private Collider2D col;
+    [Space]
+    public SpriteRenderer spriteRend;
+
+    protected bool isDead = false;
+
+    protected Rigidbody2D rb;
+    protected Collider2D col;
 
     void Start()
     {
@@ -48,7 +52,9 @@ public abstract class Enemy : MonoBehaviour
 
         // Move if activated
         if (activated == true) {
-            Move();
+            if (isDead == false) {
+                Move();
+            }
         }
     }
 

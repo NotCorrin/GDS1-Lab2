@@ -93,19 +93,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb7566743fa80e4ca46c493ebc0efce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 1
   runOffEdge: 1
   startFacingLeft: 1
   graphicsTransform: {fileID: 4897733136653859016}
   turnAroundLayer:
     serializedVersion: 2
-    m_Bits: 16
+    m_Bits: 0
   groundLayer:
     serializedVersion: 2
-    m_Bits: 32
+    m_Bits: 0
   turnAroundCheckPoint: {fileID: 5778034952804374665}
   edgeCheckPoint: {fileID: 4522306517201405136}
   distActivationFromCamera: 5
+  spriteRend: {fileID: 4351371213569017103}
+  squishedSprite: {fileID: 0}
 --- !u!1 &6081379219921773916
 GameObject:
   m_ObjectHideFlags: 0
