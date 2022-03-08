@@ -62,7 +62,7 @@ public class PlayerMove : MonoBehaviour
         float widthOrtho = Camera.main.orthographicSize * screenRatio;
 
         // Checks if the current pos is at the left of the camera
-        Debug.Log(-widthOrtho);
+        //Debug.Log(-widthOrtho);
 
         if (pos.x - someRadius < Camera.main.transform.position.x - widthOrtho)
         {
