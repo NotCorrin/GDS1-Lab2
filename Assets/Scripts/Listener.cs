@@ -51,6 +51,11 @@ public class Listener : MonoBehaviour
 
     }
 
+    public virtual void OnGameResumed()
+    {
+
+    }
+
     public virtual void OnScoreChange()
     {
 
