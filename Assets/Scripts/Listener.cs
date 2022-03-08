@@ -51,17 +51,42 @@ public class Listener : MonoBehaviour
 
     }
 
+    public virtual void OnGameResumed()
+    {
+
+    }
+
     public virtual void OnScoreChange()
     {
 
     }
 
-    public virtual void OnLifeChange()
+    public virtual void OnLifeLost()
+    {
+
+    }
+
+    public virtual void OnLifeGet()
+    {
+
+    }
+
+    public virtual void OnCoinGet()
     {
 
     }
 
     public virtual void OnPlayerStateChanged()
+    {
+
+    }
+
+    public virtual void OnPlayerGetStar()
+    {
+
+    }
+
+    public virtual void OnPlayerLoseStar()
     {
 
     }
