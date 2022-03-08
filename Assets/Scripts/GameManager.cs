@@ -219,7 +219,12 @@ public class GameManager : MonoBehaviour
 
     public static void PickUpFireFlower()
     {
-        currentPlayerState = PlayerState.fireflower;
+        if (currentPlayerState == PlayerState.mushroom)
+        {
+            currentPlayerState = PlayerState.fireflower; 
+        }
+        
+        else currentPlayerState = PlayerState.mushroom;
 
         foreach (Listener listener in listenerList)
         {
@@ -235,6 +240,11 @@ public class GameManager : MonoBehaviour
         {
             listener.OnPlayerStateChanged();
         }
+    }
+
+    public static void PickUpOneUp()
+    {
+        lives++;
     }
 
     public static void PlayerHurt()

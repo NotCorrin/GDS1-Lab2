@@ -13,7 +13,7 @@ public class PowerupPickup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+     
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -31,6 +31,18 @@ public class PowerupPickup : MonoBehaviour
         {
             Destroy(collision.gameObject);
             GameManager.PickUpMushroom();
+        }
+
+        if (collision.gameObject.tag == "OneUp")
+        {
+            Destroy(collision.gameObject);
+            GameManager.PickUpOneUp();
+        }
+
+        if (collision.gameObject.tag == "Star")
+        {
+            Destroy(collision.gameObject);
+            GameManager.PickUpStar();
         }
     }
 }

@@ -27,29 +27,37 @@ public class Fireball : MonoBehaviour
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
-
-		rb.velocity = new Vector2(velocity.x, -velocity.y);
-		
-
-
-		if (col.collider.tag == "Enemy")
+		if (col.collider.tag == "Player")
 		{
-			Destroy(col.gameObject);
-			Explode();
+			Physics2D.IgnoreCollision(col.collider, GetComponent<Collider2D>());
 		}
 
+        else
+        {
+			rb.velocity = new Vector2(velocity.x, -velocity.y);
 
-		if (col.contacts[0].normal.x != 0)
-		{
-			Debug.Log("Wall");
-			Explode();
+
+
+			if (col.collider.tag == "Enemy")
+			{
+				Destroy(col.gameObject);
+				//change to enemy death function
+				Explode();
+			}
+
+
+			if (col.contacts[0].normal.x != 0)
+			{
+				Debug.Log("Wall");
+				Explode();
+			}
 		}
-
 	}
 
 		void Explode()
 	{
 		Instantiate(exploson, transform.position, Quaternion.identity);
+		//play explosion sound if there is one
 		Destroy(this.gameObject);
 	}
 }
