@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : Listener
 {
@@ -8,9 +9,14 @@ public class UIManager : Listener
     [SerializeField] GameObject coinsUI;
     [SerializeField] GameObject timeUI;
 
-    void Start()
+    void Awake()
     {
         GameManager.AddListener(this);
+
+    }
+    void Start()
+    {
+
         if (!scoreUI)
         {
             scoreUI = GameObject.Find("Score");
@@ -30,19 +36,21 @@ public class UIManager : Listener
         if (GameManager.CurrentGameState == GameManager.GameState.playing)
         {
             // Update the time in UI
-            timeUI.GetComponent<TextMesh>().text = "Time: " + GameManager.GameTime;
+            timeUI.GetComponent<TextMesh>().text = (GameManager.GameTime).ToString("000");
         }
     }
 
     public override void OnScoreChange()
     {
+        base.OnScoreChange();
         // Update the score in UI
-        scoreUI.GetComponent<TextMesh>().text = "Score: " + GameManager.Score;
+        scoreUI.GetComponent<Text>().text = GameManager.Score.ToString("000000");
     }
 
     public override void OnCoinGet()
     {
+        base.OnCoinGet();
         // Update the coins in UI
-        coinsUI.GetComponent<TextMesh>().text = "Coins: " + GameManager.Coins;
+        coinsUI.GetComponent<Text>().text = GameManager.Coins.ToString("00");
     }
 }
