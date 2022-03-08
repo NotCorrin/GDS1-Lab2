@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
     static private List<Listener> listenerList = new List<Listener>();
 
     static private int score; //Property for score
-    public int Score
+    static public int Score
     {
         get => score;
         set
