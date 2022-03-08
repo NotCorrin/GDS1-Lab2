@@ -73,7 +73,7 @@ public class Listener : MonoBehaviour
 
     public virtual void OnCoinGet()
     {
-
+        
     }
 
     public virtual void OnPlayerStateChanged()
