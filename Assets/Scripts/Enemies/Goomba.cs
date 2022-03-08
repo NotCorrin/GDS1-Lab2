@@ -45,7 +45,7 @@ public class Goomba : Enemy
 			if (IsAbove(other.transform)) {
 				OnHit();
 			} else {
-				// DAMAGE THE PLAYER
+				GameManager.PlayerHurt();
 			}
 		}
 
