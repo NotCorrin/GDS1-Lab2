@@ -530,6 +530,30 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2860654729560940176, guid: e775980b3abc059438b8e6974eed6456, type: 3}
   m_PrefabInstance: {fileID: 2860654728134785794}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1941842947 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2860654729560940178, guid: e775980b3abc059438b8e6974eed6456, type: 3}
+  m_PrefabInstance: {fileID: 2860654728134785794}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1941842948
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941842947}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2822d8b63aecd044d89ed5fad7422cb3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1950183063
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,9 +714,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2860654729560940177, guid: e775980b3abc059438b8e6974eed6456, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2860654729560940177, guid: e775980b3abc059438b8e6974eed6456, type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2860654729560940177, guid: e775980b3abc059438b8e6974eed6456, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2860654729560940177, guid: e775980b3abc059438b8e6974eed6456, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2860654729560940178, guid: e775980b3abc059438b8e6974eed6456, type: 3}
       propertyPath: m_Name
       value: Mario
       objectReference: {fileID: 0}
+    - target: {fileID: 2860654729560940179, guid: e775980b3abc059438b8e6974eed6456, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -4021012602440736733, guid: 17af7a6f038f6064ab13c5f6dfaa71d4, type: 3}
+    - target: {fileID: 2860654729560940180, guid: e775980b3abc059438b8e6974eed6456, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2860654729560940180, guid: e775980b3abc059438b8e6974eed6456, type: 3}
+      propertyPath: EmissionModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2860654729560940182, guid: e775980b3abc059438b8e6974eed6456, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 1941842948}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e775980b3abc059438b8e6974eed6456, type: 3}

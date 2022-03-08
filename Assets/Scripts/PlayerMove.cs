@@ -13,7 +13,9 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private Rigidbody2D rb;
     [SerializeField]
-    private SpriteRenderer rend;
+    private SpriteRenderer rend;    
+    [SerializeField]
+    private Animator anim;
     private bool capoff;
     private bool facing;
     public float someRadius = 0.5f;
@@ -47,6 +49,7 @@ public class PlayerMove : MonoBehaviour
             rb.AddForce((jumpspeed + Mathf.Pow(Mathf.Abs(rb.velocity.x), 1.6f)) * Vector2.up * 0.5f, ForceMode2D.Impulse);
             Invoke("Jump", Time.deltaTime);
             grounded = false;
+            anim.SetBool("isJumping", true);
         }
         if((Input.GetKeyUp(KeyCode.W) || rb.velocity.y < 0) && grounded == false) capoff = true;
         if(capoff) {
@@ -56,7 +59,7 @@ public class PlayerMove : MonoBehaviour
     }
     void LateUpdate()
     {
-            Vector3 pos = transform.position;
+    Vector3 pos = transform.position;
 
     float screenRatio = (float)Screen.width/(float)Screen.height;
     float widthOrtho = Camera.main.orthographicSize * screenRatio;
@@ -71,7 +74,10 @@ public class PlayerMove : MonoBehaviour
 
     transform.position = pos;
 
-        rend.flipX = !facing;
+    //Animation
+    rend.flipX = !facing;
+    anim.SetFloat("xspeed", Mathf.Abs(rb.velocity.x));
+    anim.SetBool("wrongway", Mathf.Sign(rb.velocity.x) == move && Mathf.Sign(rb.velocity.x) > 0.2f );
     }
     void Jump()
     {
@@ -83,6 +89,7 @@ public class PlayerMove : MonoBehaviour
         if(collision.contacts[0].point.y == height && height < transform.position.y)
         {
             grounded = true;
+            anim.SetBool("isJumping", false);
         }
         capoff = false;
     }
