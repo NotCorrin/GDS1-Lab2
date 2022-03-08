@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    static private List<Listener> listenerList = new List<Listener>();
+    static private List<Listener> listenerList;
 
     public enum GameState { start, playing, paused, gameOver, gameWin };
     static private GameState currentGameState;
@@ -136,6 +136,11 @@ public class GameManager : MonoBehaviour
             }
             */
         }
+    }
+
+    void Awake()
+    {
+        listenerList = new List<Listener>();
     }
 
     // Start is called before the first frame update
