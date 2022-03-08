@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InvisibleBlock : MonoBehaviour
+public class InvisibleBlock : Block
 {
-    private SpriteRenderer spriteRenderer;
-    private Animator anim;
-
     public int numHit = 1;
 
     // Start is called before the first frame update
@@ -33,13 +30,22 @@ public class InvisibleBlock : MonoBehaviour
         }
     }
 
+    protected override void ActivateBlock()
+    {
+        spriteRenderer.enabled = true;
+    }
+
+    protected override bool IsValid()
+    {
+        return IsActive;
+    }
+
     IEnumerator RecoilBlock()
     {
         anim.SetBool("recoil", true);
 
         yield return new WaitForSeconds(0.2f);
 
-        spriteRenderer.enabled = true;
         anim.SetBool("recoil", false);
     }
 }

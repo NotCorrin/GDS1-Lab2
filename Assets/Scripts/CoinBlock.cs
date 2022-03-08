@@ -2,57 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinBlock : MonoBehaviour
+public class CoinBlock : Block
 {
-    public Animator cbAnim;
-    public Animator coinAnim;
-
     private int numCoins = 13;
-
-    public SpriteRenderer spriteRenderer;
-    public Sprite newSprite;
+    [SerializeField] private Animator coinAnim;
 
     // Start is called before the first frame update
-    void Start()
+
+    protected override void Start()
     {
-        cbAnim = gameObject.GetComponent<Animator>();
+        base.Start();
 
         coinAnim = GameObject.Find("CB Coin").GetComponent<Animator>();
-
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
-    void Update()
+
+    protected override void ActivateBlock()
     {
-        
+        StartCoroutine(RecoilCoin());
+
+        GameManager.Coins++;
+
+        numCoins -= 1;
+
+        Debug.Log("Coin Block Hit. Coins: " + numCoins);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected override bool IsValid()
     {
-        if (numCoins > 0 && collision.transform.position.y < transform.position.y - 0.8)
-        {
-            StartCoroutine(RecoilBlock());
-
-            StartCoroutine(RecoilCoin());
-
-            GameManager.Coins++;
-
-            numCoins -= 1;
-        }
-        else if (numCoins == 0)
-        {
-            spriteRenderer.sprite = newSprite;
-        }
-    }
-
-    IEnumerator RecoilBlock()   //makes coin block move when hit
-    {
-        cbAnim.SetBool("recoil", true);
-
-        yield return new WaitForSeconds(0.2f);
-
-        cbAnim.SetBool("recoil", false);
+        return numCoins > 0;
     }
 
     IEnumerator RecoilCoin()     //makes coin appear when coin block is hit
@@ -63,4 +42,5 @@ public class CoinBlock : MonoBehaviour
 
         coinAnim.SetBool("recoil", false);
     }
+
 }
