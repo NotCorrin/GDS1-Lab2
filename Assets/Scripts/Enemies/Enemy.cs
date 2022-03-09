@@ -16,8 +16,8 @@ public abstract class Enemy : MonoBehaviour {
     public Transform edgeCheckPoint;
     public float distActivationFromCamera = 5;
 
-    private bool facingLeft;
-    private bool activated = false;
+    protected bool facingLeft;
+    protected bool activated = false;
     private float turnCheckRange = 0.019f;
     private float edgeCheckRange = 0.019f;
     private float distToCamera;
@@ -70,9 +70,16 @@ public abstract class Enemy : MonoBehaviour {
 
         // Check if there is a wall/enemy/pipe infront of the enemy
         bool turnAround = Physics2D.OverlapCircle(turnAroundCheckPoint.position, turnCheckRange, turnAroundLayer);
+        Collider2D other = Physics2D.OverlapCircle(turnAroundCheckPoint.position, turnCheckRange, turnAroundLayer);
         // If there is... flip
-        if (turnAround) {
-            Flip();
+        if ((gameObject.tag == "Shell") == false) {
+            if (turnAround && other.tag != "Shell") {
+                Flip();
+            }
+		} else {
+            if (turnAround && other.tag != "Enemy") {
+                Flip();
+            }
         }
 
         // The current velocity
@@ -80,7 +87,7 @@ public abstract class Enemy : MonoBehaviour {
 
     }
 
-    private void Flip() {
+    protected void Flip() {
         // If called, reverse 'facingLeft'
         facingLeft = !facingLeft;
         
