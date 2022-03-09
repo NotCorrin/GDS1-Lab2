@@ -247,4 +247,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newSprite: {fileID: 21300000, guid: b11be76d5818618458bdf930d17f87ef, type: 3}
   numCoins: 1
-  coinAnim: {fileID: 0}
+  coinAnim: {fileID: 2780006900874519617}
