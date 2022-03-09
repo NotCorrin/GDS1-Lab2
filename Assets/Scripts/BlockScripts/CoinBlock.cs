@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CoinBlock : Block
 {
-    private int numCoins = 13;
-    [SerializeField] private Animator coinAnim;
+    [SerializeField] protected int numCoins = 13;
+    private Animator coinAnim;
 
     // Start is called before the first frame update
 
@@ -21,8 +21,6 @@ public class CoinBlock : Block
         //StartCoroutine(RecoilCoin());
 
         coinAnim.SetTrigger("recoil");
-
-        Debug.Log("Coin Block Activated");
 
         GameManager.Coins++;
 

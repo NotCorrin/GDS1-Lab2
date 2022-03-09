@@ -29,7 +29,7 @@ public abstract class Block : MonoBehaviour
 
             if (collision.gameObject.tag.Equals("Enemy"))
             {
-                if (collision.GetContact(0).point.y > transform.position.y + 0.08f)
+                if (collision.GetContact(0).point.y > transform.position.y + 0.5f)
                 {
                     enemiesInContact.Add(collision.gameObject.GetComponent<Enemy>());
                 }
@@ -37,7 +37,7 @@ public abstract class Block : MonoBehaviour
 
             else if (collision.gameObject.tag.Equals("Player"))
             {
-                if (IsValid() && IsActive && collision.GetContact(0).point.y < transform.position.y - 0.08f)
+                if (IsValid() && IsActive && collision.GetContact(0).point.y < transform.position.y - 0.5f)
                 {
                     ActivateBlock();
                     AnimateBlock();
