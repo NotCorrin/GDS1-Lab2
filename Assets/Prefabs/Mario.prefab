@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2860654729560940178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -99,10 +99,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpspeed: 8
-  acc: 15
+  acc: 25
   maxfallspeed: 20
-  speed: 2.5
-  runspeed: 5
+  speed: 5
+  runspeed: 10
   curmaxspeed: 0
   move: 0
   grounded: 0
