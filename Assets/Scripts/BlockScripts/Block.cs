@@ -11,6 +11,8 @@ public abstract class Block : MonoBehaviour
 
     protected bool IsActive = true;
 
+    protected List<Enemy> enemiesInContact = new List<Enemy>();
+
     // Start is called before the first frame update
 
     protected virtual void Awake()
@@ -22,19 +24,58 @@ public abstract class Block : MonoBehaviour
 
     protected void OnCollisionEnter2D(Collision2D collision)
     {
-        if (IsValid() && IsActive && collision.transform.position.y < transform.position.y - 0.08f)
+        if (IsActive)
         {
-            ActivateBlock();
-            AnimateBlock();
 
-            if (!IsValid())
+            if (collision.gameObject.tag.Equals("Enemy"))
             {
-                DisableBlock();
+                if (collision.GetContact(0).point.y > transform.position.y + 0.08f)
+                {
+                    enemiesInContact.Add(collision.gameObject.GetComponent<Enemy>());
+                }
+            }
+
+            else if (collision.gameObject.tag.Equals("Player"))
+            {
+                if (IsValid() && IsActive && collision.GetContact(0).point.y < transform.position.y - 0.08f)
+                {
+                    ActivateBlock();
+                    AnimateBlock();
+
+                    if (!IsValid())
+                    {
+                        DisableBlock();
+                    }
+                }
+
             }
         }
     }
 
+    protected void OnCollisionExit2D(Collision2D collision)
+    {
+        
+        if (collision.gameObject.tag.Equals("Enemy"))
+        {
+            Enemy enemyComponent = collision.gameObject.GetComponent<Enemy>();
+
+            if (enemiesInContact.Contains(enemyComponent))
+            {
+                enemiesInContact.Remove(enemyComponent);
+            }
+        }
+            
+    }
+
     abstract protected void ActivateBlock();
+
+    protected void KillEnemiesInContact()
+    {
+        foreach (Enemy enemy in enemiesInContact)
+        {
+            enemy.OnHit();
+        }
+    }
 
     protected void DisableBlock()
     {
