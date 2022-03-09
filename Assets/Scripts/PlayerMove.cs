@@ -10,8 +10,7 @@ public class PlayerMove : Listener
     public float curmaxspeed;
     public float move;
     public bool grounded;
-    [SerializeField]
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     [SerializeField]
     private SpriteRenderer rend;
     [SerializeField]
@@ -23,7 +22,7 @@ public class PlayerMove : Listener
     private bool facing;
     public float someRadius = 0.5f;
     public bool isLocked;
-    public float flagButt;
+    public bool runaway;
     // Start is called before the first frame update
     public override void OnPlayerStateChanged()
     {
@@ -49,7 +48,20 @@ public class PlayerMove : Listener
     }
     void Update()
     {
-        if(isLocked) return;
+        if(isLocked) 
+        {
+            if(runaway) 
+            {
+                rb.AddForce(1 * acc * Vector3.right * Time.deltaTime, ForceMode2D.Impulse);
+                rb.gravityScale = 1;
+            }
+            else 
+            {
+                rb.velocity = Vector2.zero; 
+                rb.gravityScale = 0;
+            }
+            return;
+        }
         curmaxspeed = (Input.GetKey(KeyCode.LeftShift)?runspeed:speed); //check if running
         move = Input.GetAxisRaw("Horizontal"); //input
         if(move == 1) facing = true;
@@ -117,6 +129,7 @@ public class PlayerMove : Listener
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
+        if(isLocked) runaway = true;
         float height = collision.contacts[1].point.y;
         if (collision.contacts[0].point.y == height && height < transform.position.y)
         {
