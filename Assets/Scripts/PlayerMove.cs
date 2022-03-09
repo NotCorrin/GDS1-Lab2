@@ -92,7 +92,6 @@ public class PlayerMove : Listener
         float widthOrtho = Camera.main.orthographicSize * screenRatio;
 
         // Checks if the current pos is at the left of the camera
-        //Debug.Log(-widthOrtho);
 
         if (pos.x - someRadius < Camera.main.transform.position.x - widthOrtho)
         {
