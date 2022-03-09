@@ -38,7 +38,7 @@ public class PlayerMove : MonoBehaviour
             {
                 //rb.velocity -= Mathf.Sign(rb.velocity.x) * acc * 0.5f * Vector2.right;
                 if(Mathf.Abs(rb.velocity.x) < 0.1f) rb.velocity = Vector2.zero; //stop moving
-                rb.AddForce(Mathf.Sign(rb.velocity.x) * acc * 0.5f * Vector2.left); //go back
+                rb.AddForce(Mathf.Sign(rb.velocity.x) * (acc-Mathf.Abs(rb.velocity.x)) * 0.15f * Vector2.left); //go back
                 if(Mathf.Abs(rb.velocity.x) < 0.1f) rb.velocity = Vector2.zero; //please for the love of god stop
             }
         }
@@ -59,26 +59,27 @@ public class PlayerMove : MonoBehaviour
     }
     void LateUpdate()
     {
-    Vector3 pos = transform.position;
+        Vector3 pos = transform.position;
 
-    float screenRatio = (float)Screen.width/(float)Screen.height;
-    float widthOrtho = Camera.main.orthographicSize * screenRatio;
+        float screenRatio = (float)Screen.width/(float)Screen.height;
+        float widthOrtho = Camera.main.orthographicSize * screenRatio;
 
-    // Checks if the current pos is at the left of the camera
-    Debug.Log(-widthOrtho);
+        // Checks if the current pos is at the left of the camera
+        Debug.Log(-widthOrtho);
 
-    if(pos.x - someRadius < Camera.main.transform.position.x-widthOrtho){
-        pos.x = Camera.main.transform.position.x-widthOrtho + someRadius;
-        if(rb.velocity.x < 0)rb.velocity = new Vector2(0, rb.velocity.y);
+        if(pos.x - someRadius < Camera.main.transform.position.x-widthOrtho){
+            pos.x = Camera.main.transform.position.x-widthOrtho + someRadius;
+            if(rb.velocity.x < 0)rb.velocity = new Vector2(0, rb.velocity.y);
+        }
+
+        transform.position = pos;
+
+        //Animation
+        rend.flipX = !facing;
+        anim.SetFloat("xspeed", Mathf.Abs(rb.velocity.x));
+        anim.SetBool("isSliding", Mathf.Sign(rb.velocity.x) == -move && Mathf.Abs(rb.velocity.x) > 1.5f);
     }
 
-    transform.position = pos;
-
-    //Animation
-    rend.flipX = !facing;
-    anim.SetFloat("xspeed", Mathf.Abs(rb.velocity.x));
-    anim.SetBool("wrongway", Mathf.Sign(rb.velocity.x) == move && Mathf.Sign(rb.velocity.x) > 0.2f );
-    }
     void Jump()
     {
         rb.AddForce((jumpspeed + Mathf.Pow(Mathf.Abs(rb.velocity.x), 1.6f)) * Vector2.up * 0.5f, ForceMode2D.Impulse);
