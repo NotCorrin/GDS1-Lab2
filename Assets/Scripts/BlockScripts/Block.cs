@@ -13,6 +13,8 @@ public abstract class Block : MonoBehaviour
 
     protected List<Enemy> enemiesInContact = new List<Enemy>();
 
+    private Vector2 BlockPosition;
+
     // Start is called before the first frame update
 
     protected virtual void Awake()
@@ -20,6 +22,8 @@ public abstract class Block : MonoBehaviour
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
         anim = gameObject.GetComponent<Animator>();
+
+        BlockPosition = transform.position;
     }
 
     protected void OnCollisionEnter2D(Collision2D collision)
@@ -88,6 +92,13 @@ public abstract class Block : MonoBehaviour
     protected void AnimateBlock()
     {
         anim.SetTrigger("recoil");
+        StartCoroutine(ResetBlockPosition());
+    }
+
+    IEnumerator ResetBlockPosition()
+    {
+        yield return new WaitForSeconds(0.27f);
+        transform.position = BlockPosition;
     }
 
 
