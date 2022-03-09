@@ -25,7 +25,7 @@ public class Mushroom : MonoBehaviour
         {
             Physics2D.IgnoreCollision(other.collider, GetComponent<Collider2D>());
         }
-        else
+        else if (other.GetContact(0).point.y > transform.position.y - 0.49)
         mushroomSpeed *= -1;
     }
 
