@@ -22,6 +22,8 @@ public class PlayerMove : Listener
     private bool capoff;
     private bool facing;
     public float someRadius = 0.5f;
+    public bool isLocked;
+    public float flagButt;
     // Start is called before the first frame update
     public override void OnPlayerStateChanged()
     {
@@ -47,6 +49,7 @@ public class PlayerMove : Listener
     }
     void Update()
     {
+        if(isLocked) return;
         curmaxspeed = (Input.GetKey(KeyCode.LeftShift)?runspeed:speed); //check if running
         move = Input.GetAxisRaw("Horizontal"); //input
         if(move == 1) facing = true;

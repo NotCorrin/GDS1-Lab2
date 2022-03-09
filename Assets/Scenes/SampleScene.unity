@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 470137018}
   - component: {fileID: 470137020}
   m_Layer: 0
-  m_Name: Flagpole
+  m_Name: Flag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,6 +276,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f624c63e29fa994ca02351da0ff5107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flagTop: 0
+  flagBottom: 8
+  scoreValues: f4010000e8030000d0070000
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,7 +869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2860654729560940177, guid: e775980b3abc059438b8e6974eed6456, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2860654729560940178, guid: e775980b3abc059438b8e6974eed6456, type: 3}
       propertyPath: m_Name
