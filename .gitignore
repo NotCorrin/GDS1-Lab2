@@ -71,3 +71,4 @@ crashlytics-build.properties
 
 # Built Visual Studio Code Extensions
 *.vsix
+UserSettings/EditorUserSettings.asset

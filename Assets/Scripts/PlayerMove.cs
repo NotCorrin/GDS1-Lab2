@@ -129,6 +129,8 @@ public class PlayerMove : Listener
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log(collision.gameObject.name);
+        if(collision.gameObject.name == "Fireball(Clone)") return;
         if(isLocked) runaway = true;
         float height = collision.contacts[1].point.y;
         if (collision.contacts[0].point.y == height && height < transform.position.y)
