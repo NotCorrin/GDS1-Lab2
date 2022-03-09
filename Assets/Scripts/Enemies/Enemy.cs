@@ -100,5 +100,5 @@ public abstract class Enemy : MonoBehaviour {
             moveSpeed = -moveSpeed;
         }
     }
-    protected abstract void OnHit();
+    public abstract void OnHit();
 }
