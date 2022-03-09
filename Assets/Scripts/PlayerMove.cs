@@ -44,8 +44,14 @@ public class PlayerMove : Listener
     void Awake()
     {
         GameManager.AddListener(this);
+        //GameManager.listenerList.Add(this);
         col.size = GameManager.CurrentPlayerState == GameManager.PlayerState.normal?Vector2.one:new Vector2(1,2);
         anim.SetInteger("size", (int)GameManager.CurrentPlayerState);
+    }
+    void Start()
+    {
+        //GameManager.listenerList.Add(this);
+        GameManager.AddListener(this);
     }
     void Update()
     {
@@ -87,7 +93,7 @@ public class PlayerMove : Listener
         //jump
         if(Input.GetKeyDown(KeyCode.W) && (grounded == true) && rb.velocity.y > -0.5f)
         {
-            Debug.Log(rb.velocity.y);
+            //Debug.Log(GameManager.listenerList.Count);
             rb.AddForce((jumpspeed + Mathf.Pow(Mathf.Abs(rb.velocity.x), 1.6f)) * Vector2.up * 0.5f, ForceMode2D.Impulse);
             Invoke("Jump", Time.deltaTime);
             grounded = false;

@@ -272,12 +272,12 @@ public class GameManager : MonoBehaviour
 
     public static void PickUpMushroom()
     {
-        currentPlayerState = PlayerState.mushroom;
+        CurrentPlayerState = PlayerState.mushroom;
     }
 
     public static void PickUpFireFlower()
     {
-        currentPlayerState = PlayerState.fireflower;
+        CurrentPlayerState = PlayerState.fireflower;
     }
 
     public static void PickUpStar()
@@ -288,11 +288,11 @@ public class GameManager : MonoBehaviour
 
     public static void PlayerHurt()
     {
-        if (currentPlayerState == PlayerState.fireflower || currentPlayerState == PlayerState.mushroom)
+        if (CurrentPlayerState == PlayerState.fireflower || CurrentPlayerState == PlayerState.mushroom)
         {
-            currentPlayerState = PlayerState.normal;
+            CurrentPlayerState = PlayerState.normal;
         }
-        else if (currentPlayerState == PlayerState.normal)
+        else if (CurrentPlayerState == PlayerState.normal)
         {
             KillPlayer();
         }
@@ -301,14 +301,14 @@ public class GameManager : MonoBehaviour
 
     public static void KillPlayer()
     {
-        currentPlayerState = PlayerState.dead;
+        CurrentPlayerState = PlayerState.dead;
 
         PauseGame();
     }
 
     public static void ResetPlayer()
     {
-        currentPlayerState = PlayerState.normal;
+        CurrentPlayerState = PlayerState.normal;
     }
 
     public static void Respawn()
