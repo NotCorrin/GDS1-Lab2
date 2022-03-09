@@ -22,7 +22,7 @@ public class Goomba : Enemy
 		isDead = true;
 
 		rb.velocity = Vector2.zero;
-		rb.velocity = new Vector2(3.5f, 8f);
+		rb.velocity = new Vector2(2.5f, 6f);
 		
 		col.enabled = false;
 		spriteRend.flipX = true;
@@ -52,14 +52,14 @@ public class Goomba : Enemy
 		// | ADD detection for when the block underneath gets hit
 		// | If "Fireball is wrong pls change"
 		// V 
-		if (other.transform.tag == "Fireball") {
+		if (other.transform.tag == "Fireball" || other.transform.tag == "Shell") {
 			OnHit();
 		}
 	}
 
 	bool IsAbove(Transform player) {
 		// Check if the player above...
-		if(player.position.y > transform.position.y + 0.5f && 
+		if(player.position.y > transform.position.y + 0.4f && 
 			player.position.x > transform.position.x - 0.5f &&
 			player.position.x < transform.position.x + 0.5f) {
 			squish = true;
