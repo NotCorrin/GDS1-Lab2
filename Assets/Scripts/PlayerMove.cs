@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMove : Listener
@@ -26,7 +27,11 @@ public class PlayerMove : Listener
     // Start is called before the first frame update
     public override void OnPlayerStateChanged()
     {
-        if(GameManager.CurrentPlayerState == GameManager.PlayerState.dead) GameManager.Respawn();
+        if(GameManager.CurrentPlayerState == GameManager.PlayerState.dead) 
+        {
+            GameManager.ResetPlayer(); 
+            SceneManager.LoadScene(1);
+        }
         else if(GameManager.CurrentPlayerState == GameManager.PlayerState.normal) Shrink();
         else Grow();
     }
@@ -42,7 +47,7 @@ public class PlayerMove : Listener
     void Shrink()
     {
         col.size = Vector2.one;
-        
+
         anim.SetInteger("size", (int)GameManager.CurrentPlayerState);
         anim.SetTrigger("Shrink");
     }
@@ -136,6 +141,8 @@ public class PlayerMove : Listener
         rend.flipX = !facing;
         anim.SetFloat("xspeed", Mathf.Abs(rb.velocity.x)/2);
         anim.SetBool("isSliding", Mathf.Sign(rb.velocity.x) == -move && Mathf.Abs(rb.velocity.x) > 1.5f);
+
+        if(transform.position.y < -6) SceneManager.LoadScene(1);
     }
 
     void Jump()
