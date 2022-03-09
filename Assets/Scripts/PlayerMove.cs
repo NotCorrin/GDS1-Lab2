@@ -54,7 +54,6 @@ public class PlayerMove : Listener
 
         rb.AddForce(move * acc * Vector3.right * Time.deltaTime, ForceMode2D.Impulse); //output
         //if(Mathf.Sign(curspeed.x) > curmaxspeed || (move == 0 && Mathf.Sign(curspeed.x) > Time.deltaTime * acc)) curspeed.x -= Time.deltaTime * Mathf.Sign(curspeed.x) * acc;
-        rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -curmaxspeed, curmaxspeed), Mathf.Clamp(rb.velocity.y, -maxfallspeed, jumpspeed)); //clamp velocity to walk/run speed
         if(grounded == true)
         {
             if(Mathf.Abs(rb.velocity.x) < 0.1f) rb.velocity = Vector2.zero; //stop moving
@@ -82,6 +81,8 @@ public class PlayerMove : Listener
     }
     void FixedUpdate()
     {
+        rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x, -curmaxspeed, curmaxspeed), Mathf.Clamp(rb.velocity.y, -maxfallspeed, jumpspeed)); //clamp velocity to walk/run speed
+        
         if((Input.GetKeyUp(KeyCode.W) || rb.velocity.y < 0) && grounded == false) capoff = true;
         if(capoff) {
             rb.AddForce(Vector2.down * 6);
