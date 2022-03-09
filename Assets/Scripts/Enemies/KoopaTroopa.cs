@@ -58,6 +58,13 @@ public class KoopaTroopa : Enemy
 	}
 
 	void OnCollisionEnter2D(Collision2D other) {
+		if(movingShell && other.transform.tag == "Player") {
+			if (IsAbove(other.transform)) {
+				OnHit();
+			} else {
+				GameManager.PlayerHurt();
+			}
+		}
 		if (inShell && other.transform.tag == "Player") {
 			MoveShell(other.transform);
 		}
