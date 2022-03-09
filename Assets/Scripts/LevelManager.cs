@@ -6,26 +6,33 @@ using UnityEngine.SceneManagement;
 public class LevelManager : Listener
 {
     // Start is called before the first frame update
-    void Start()
+    [SerializeField] static protected Scene currentLevel;
+
+    void Awake()
     {
         GameManager.AddListener(this);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     
     static public void RestartLevel()
     {
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.buildIndex);
+        SceneManager.LoadScene(currentLevel.buildIndex);
+    }
+
+    public override void OnGameStart()
+    {
+        SceneManager.LoadScene("World");
+        currentLevel = SceneManager.GetActiveScene();
+    }
+
+    public override void OnGameReset()
+    {
+        SceneManager.LoadScene("Menu");
     }
 
     public override void OnGameOver()
     {
-        //Load game over scene
+        SceneManager.LoadScene("Menu");
     }
 
     public override void OnLevelRestarted()
