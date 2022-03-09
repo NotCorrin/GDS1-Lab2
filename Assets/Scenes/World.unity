@@ -9922,6 +9922,13 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     source: {fileID: 0}
+  - name: mario-die
+    clip: {fileID: 8300000, guid: cae96379e1f33994ab052357e25e013b, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
   - name: pipe
     clip: {fileID: 8300000, guid: 9e133d8cdf0073c45bb11e24f21fefe1, type: 3}
     volume: 0.5
@@ -9943,8 +9950,22 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     source: {fileID: 0}
+  - name: stage-clear
+    clip: {fileID: 8300000, guid: c362323239c1d794099557488b4e0272, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
   - name: stomp
     clip: {fileID: 8300000, guid: 140ef2d37404cb64ba0105c808dfbeae, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: time-warning
+    clip: {fileID: 8300000, guid: 0b1418b96f6bfec43bcd853548298151, type: 3}
     volume: 0.5
     pitch: 1
     loop: 0
