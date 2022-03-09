@@ -8,6 +8,9 @@ TagManager:
   - Shell
   - FireFlower
   - Mushroom
+  - Star
+  - Pipe1
+  - Pipe2
   layers:
   - Default
   - TransparentFX
