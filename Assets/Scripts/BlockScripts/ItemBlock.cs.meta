@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 268d581f6fb880c49961519f7fd3d7f3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - newSprite: {instanceID: 0}
+  - mushroom: {instanceID: 0}
+  - fireFlower: {instanceID: 0}
+  - mushroomToSpawn: {fileID: 5952491816784331089, guid: bc1aeccfc4dfa464bb7b20e9d8808224, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
