@@ -13,13 +13,28 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private Rigidbody2D rb;
     [SerializeField]
-    private SpriteRenderer rend;    
+    private SpriteRenderer rend;        
+    [SerializeField]
+    private BoxCollider2D col;    
     [SerializeField]
     private Animator anim;
+    public Sprite[] big_sprites;
     private bool capoff;
     private bool facing;
     public float someRadius = 0.5f;
     // Start is called before the first frame update
+    void Grow()
+    {
+        col.size = new Vector2(1,2);
+        anim.SetInteger("size", (int)GameManager.CurrentGameState);
+        anim.SetTrigger("Grow");
+    }    
+    void Shrink()
+    {
+        col.size = Vector2.one;
+        anim.SetInteger("size", (int)GameManager.CurrentGameState);
+        anim.SetTrigger("Shrink");
+    }
     void Update()
     {
         curmaxspeed = (Input.GetKey(KeyCode.LeftShift)?runspeed:speed); //check if running
@@ -56,6 +71,8 @@ public class PlayerMove : MonoBehaviour
             rb.AddForce(Vector2.down * 6);
             if(rb.velocity.y > 0)rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.9f);
         }
+        if(Input.GetKeyDown(KeyCode.Alpha1)) Grow();
+        if(Input.GetKeyDown(KeyCode.Alpha2)) Shrink();
     }
     void LateUpdate()
     {

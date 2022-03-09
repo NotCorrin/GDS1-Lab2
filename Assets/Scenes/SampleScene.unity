@@ -416,6 +416,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1310662150 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2860654729560940177, guid: e775980b3abc059438b8e6974eed6456, type: 3}
+  m_PrefabInstance: {fileID: 2860654728134785794}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1349296119
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,9 +695,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2860654729560940177, guid: e775980b3abc059438b8e6974eed6456, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2860654729560940177, guid: e775980b3abc059438b8e6974eed6456, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2860654729560940177, guid: e775980b3abc059438b8e6974eed6456, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2860654729560940178, guid: e775980b3abc059438b8e6974eed6456, type: 3}
       propertyPath: m_Name
       value: Mario
       objectReference: {fileID: 0}
+    - target: {fileID: 2860654729560940179, guid: e775980b3abc059438b8e6974eed6456, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 593080629238587848, guid: 891815b16a8ee1f4f941365be8bd4d93, type: 3}
+    - target: {fileID: 2860654729560940182, guid: e775980b3abc059438b8e6974eed6456, type: 3}
+      propertyPath: col
+      value: 
+      objectReference: {fileID: 1310662150}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e775980b3abc059438b8e6974eed6456, type: 3}
