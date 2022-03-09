@@ -114,9 +114,9 @@ GameObject:
   - component: {fileID: 2780006901673487072}
   - component: {fileID: 2780006901673487087}
   - component: {fileID: 2780006901673487086}
-  - component: {fileID: 2780006901673487074}
+  - component: {fileID: 8295262577131497516}
   m_Layer: 0
-  m_Name: Coin Block
+  m_Name: CoinBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -177,12 +177,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c8abd0b35ec059045a68604cdee4b301, type: 3}
-  m_Color: {r: 1, g: 0.9302826, b: 0, a: 1}
+  m_Sprite: {fileID: 4977970841946464033, guid: 68366e0adfd09694e98f6d86d68f14d1, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.3416667, y: 1.3416667}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -205,14 +205,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1.3416667, y: 1.3416667}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!95 &2780006901673487086
 Animator:
@@ -233,7 +233,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2780006901673487074
+--- !u!114 &8295262577131497516
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,4 +246,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   newSprite: {fileID: 21300000, guid: b11be76d5818618458bdf930d17f87ef, type: 3}
+  numCoins: 1
   coinAnim: {fileID: 0}
