@@ -104,7 +104,7 @@ public class PlayerMove : Listener
 
         //Animation
         rend.flipX = !facing;
-        anim.SetFloat("xspeed", Mathf.Abs(rb.velocity.x));
+        anim.SetFloat("xspeed", Mathf.Abs(rb.velocity.x)/2);
         anim.SetBool("isSliding", Mathf.Sign(rb.velocity.x) == -move && Mathf.Abs(rb.velocity.x) > 1.5f);
     }
 
