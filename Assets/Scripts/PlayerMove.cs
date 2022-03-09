@@ -23,6 +23,11 @@ public class PlayerMove : Listener
     private bool facing;
     public float someRadius = 0.5f;
     // Start is called before the first frame update
+    public override void OnPlayerStateChanged()
+    {
+        if(GameManager.CurrentPlayerState == GameManager.PlayerState.normal) Shrink();
+        else Grow();
+    }
     void Grow()
     {
         col.size = new Vector2(1,2);
