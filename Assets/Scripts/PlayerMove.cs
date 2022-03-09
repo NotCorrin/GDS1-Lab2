@@ -10,8 +10,7 @@ public class PlayerMove : Listener
     public float curmaxspeed;
     public float move;
     public bool grounded;
-    [SerializeField]
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     [SerializeField]
     private SpriteRenderer rend;
     [SerializeField]
@@ -22,6 +21,8 @@ public class PlayerMove : Listener
     private bool capoff;
     private bool facing;
     public float someRadius = 0.5f;
+    public bool isLocked;
+    public bool runaway;
     // Start is called before the first frame update
     public override void OnPlayerStateChanged()
     {
@@ -42,11 +43,26 @@ public class PlayerMove : Listener
     }
     void Awake()
     {
+        GameManager.AddListener(this);
         col.size = GameManager.CurrentPlayerState == GameManager.PlayerState.normal?Vector2.one:new Vector2(1,2);
         anim.SetInteger("size", (int)GameManager.CurrentPlayerState);
     }
     void Update()
     {
+        if(isLocked) 
+        {
+            if(runaway) 
+            {
+                rb.AddForce(1 * acc * Vector3.right * Time.deltaTime, ForceMode2D.Impulse);
+                rb.gravityScale = 1;
+            }
+            else 
+            {
+                rb.velocity = Vector2.zero; 
+                rb.gravityScale = 0;
+            }
+            return;
+        }
         curmaxspeed = (Input.GetKey(KeyCode.LeftShift)?runspeed:speed); //check if running
         move = Input.GetAxisRaw("Horizontal"); //input
         if(move == 1) facing = true;
@@ -69,8 +85,9 @@ public class PlayerMove : Listener
         }
 
         //jump
-        if(Input.GetKeyDown(KeyCode.W) && grounded == true)
+        if(Input.GetKeyDown(KeyCode.W) && (grounded == true) && rb.velocity.y > -0.5f)
         {
+            Debug.Log(rb.velocity.y);
             rb.AddForce((jumpspeed + Mathf.Pow(Mathf.Abs(rb.velocity.x), 1.6f)) * Vector2.up * 0.5f, ForceMode2D.Impulse);
             Invoke("Jump", Time.deltaTime);
             grounded = false;
@@ -92,7 +109,6 @@ public class PlayerMove : Listener
         float widthOrtho = Camera.main.orthographicSize * screenRatio;
 
         // Checks if the current pos is at the left of the camera
-        //Debug.Log(-widthOrtho);
 
         if (pos.x - someRadius < Camera.main.transform.position.x - widthOrtho)
         {
@@ -114,9 +130,12 @@ public class PlayerMove : Listener
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        float height = collision.contacts[1].point.y;
-        if (collision.contacts[0].point.y == height && height < transform.position.y)
+        if(collision.gameObject.name == "Fireball(Clone)") return;
+        if(isLocked) runaway = true;
+        float height = Mathf.FloorToInt(collision.contacts[1].point.y*1000)/1000f;
+        if (Mathf.FloorToInt(collision.contacts[0].point.y*1000)/1000f == Mathf.FloorToInt(collision.contacts[1].point.y*1000)/1000f && height < transform.position.y + 0.1f)
         {
+            Debug.Log(collision.gameObject.name);
             grounded = true;
             anim.SetBool("isJumping", false);
         }

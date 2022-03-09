@@ -11,12 +11,14 @@ GameObject:
   - component: {fileID: 2860654729560940176}
   - component: {fileID: 2860654729560940179}
   - component: {fileID: 2860654729560940182}
+  - component: {fileID: 4759197099970763991}
+  - component: {fileID: 6953309747960175345}
   - component: {fileID: 2860654729560940177}
   - component: {fileID: 2860654729560940181}
   - component: {fileID: 1941842948}
   m_Layer: 6
   m_Name: Mario
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32471f4c44c9551488494c7d96820eef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpspeed: 8
+  jumpspeed: 13.5
   acc: 25
   maxfallspeed: 20
   speed: 5
@@ -112,6 +114,37 @@ MonoBehaviour:
   anim: {fileID: 1941842948}
   big_sprites: []
   someRadius: 0.25
+  isLocked: 0
+  runaway: 0
+--- !u!114 &4759197099970763991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2860654729560940178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 689569054e412a449bc179f0058cd28e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 6621053416876814258, guid: e115be7e81fcd494a9fea09310cb58ff, type: 3}
+  velocity: {x: 0, y: 0}
+  offset: {x: 0.4, y: 0.1}
+  cooldown: 1
+  rend: {fileID: 2860654729560940179}
+--- !u!114 &6953309747960175345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2860654729560940178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0edd0ad3e5ad874eb67e08fb27dd3ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &2860654729560940177
 BoxCollider2D:
   m_ObjectHideFlags: 0

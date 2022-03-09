@@ -7,7 +7,7 @@ public class CameraFollow : MonoBehaviour
     public Transform target;
     private Vector3 curPos => target.position;
     public Vector3 lastPos;
-    private Vector3 cameraOffset = new Vector3(0,0,-10);
+    public Vector3 cameraOffset = new Vector3(0,5.2f,-10);
     public float cutOff;
     public float speed;
     public float startx = 0;
