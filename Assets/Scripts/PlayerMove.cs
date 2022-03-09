@@ -43,6 +43,7 @@ public class PlayerMove : Listener
     }
     void Awake()
     {
+        GameManager.AddListener(this);
         col.size = GameManager.CurrentPlayerState == GameManager.PlayerState.normal?Vector2.one:new Vector2(1,2);
         anim.SetInteger("size", (int)GameManager.CurrentPlayerState);
     }
@@ -132,10 +133,6 @@ public class PlayerMove : Listener
         if(collision.gameObject.name == "Fireball(Clone)") return;
         if(isLocked) runaway = true;
         float height = Mathf.FloorToInt(collision.contacts[1].point.y*1000)/1000f;
-        Debug.Log(Mathf.FloorToInt(collision.contacts[0].point.y*1000)/1000f);
-        Debug.Log(Mathf.FloorToInt(collision.contacts[1].point.y*1000)/1000f);
-        Debug.Log(Mathf.FloorToInt(collision.contacts[0].point.y*1000)/1000f == height);
-        Debug.Log(height);
         if (Mathf.FloorToInt(collision.contacts[0].point.y*1000)/1000f == Mathf.FloorToInt(collision.contacts[1].point.y*1000)/1000f && height < transform.position.y + 0.1f)
         {
             Debug.Log(collision.gameObject.name);
