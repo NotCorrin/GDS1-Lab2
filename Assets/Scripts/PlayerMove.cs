@@ -63,7 +63,7 @@ public class PlayerMove : Listener
             {
                 //rb.velocity -= Mathf.Sign(rb.velocity.x) * acc * 0.5f * Vector2.right;
                 if(Mathf.Abs(rb.velocity.x) < 0.1f) rb.velocity = Vector2.zero; //stop moving
-                rb.AddForce(Mathf.Sign(rb.velocity.x) * (acc-Mathf.Abs(rb.velocity.x)) * 0.15f * Vector2.left); //go back
+                rb.AddForce(Mathf.Sign(rb.velocity.x) * (acc-Mathf.Abs(rb.velocity.x)) * acc * 0.5f * Vector2.left * Time.deltaTime); //go back
                 if(Mathf.Abs(rb.velocity.x) < 0.1f) rb.velocity = Vector2.zero; //please for the love of god stop
             }
         }
@@ -76,13 +76,17 @@ public class PlayerMove : Listener
             grounded = false;
             anim.SetBool("isJumping", true);
         }
+
+        if(Input.GetKeyDown(KeyCode.Alpha1)) Grow();
+        if(Input.GetKeyDown(KeyCode.Alpha2)) Shrink();
+    }
+    void FixedUpdate()
+    {
         if((Input.GetKeyUp(KeyCode.W) || rb.velocity.y < 0) && grounded == false) capoff = true;
         if(capoff) {
             rb.AddForce(Vector2.down * 6);
             if(rb.velocity.y > 0)rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.9f);
         }
-        if(Input.GetKeyDown(KeyCode.Alpha1)) Grow();
-        if(Input.GetKeyDown(KeyCode.Alpha2)) Shrink();
     }
     void LateUpdate()
     {
