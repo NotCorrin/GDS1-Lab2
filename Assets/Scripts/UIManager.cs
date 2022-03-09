@@ -32,7 +32,7 @@ public class UIManager : Listener
         if (GameManager.CurrentGameState == GameManager.GameState.playing)
         {
             // Update the time in UI
-            timeUI.GetComponent<TextMesh>().text = (GameManager.GameTime).ToString("000");
+            timeUI.GetComponent<Text>().text = (GameManager.GameTime).ToString("000");
         }
     }
 
