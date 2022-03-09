@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMove : MonoBehaviour
+public class PlayerMove : Listener
 {
     [SerializeField]
     private float jumpspeed = 1, acc = 1, maxfallspeed = 1, speed = 5, runspeed = 8.5f;
@@ -13,7 +13,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private Rigidbody2D rb;
     [SerializeField]
-    private SpriteRenderer rend;        
+    private SpriteRenderer rend;
     [SerializeField]
     private BoxCollider2D col;    
     [SerializeField]
