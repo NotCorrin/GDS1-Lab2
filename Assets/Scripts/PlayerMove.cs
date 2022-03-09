@@ -26,14 +26,19 @@ public class PlayerMove : MonoBehaviour
     void Grow()
     {
         col.size = new Vector2(1,2);
-        anim.SetInteger("size", (int)GameManager.CurrentGameState);
+        anim.SetInteger("size", (int)GameManager.CurrentPlayerState);
         anim.SetTrigger("Grow");
     }    
     void Shrink()
     {
         col.size = Vector2.one;
-        anim.SetInteger("size", (int)GameManager.CurrentGameState);
+        anim.SetInteger("size", (int)GameManager.CurrentPlayerState);
         anim.SetTrigger("Shrink");
+    }
+    void Awake()
+    {
+        col.size = GameManager.CurrentPlayerState == GameManager.PlayerState.normal?Vector2.one:new Vector2(1,2);
+        anim.SetInteger("size", (int)GameManager.CurrentPlayerState);
     }
     void Update()
     {
