@@ -8,8 +8,8 @@ public class Goomba : Enemy
 
 	private bool squish = false;
 
-	public  override void OnHit() {
-		// Add score
+	public override void OnHit() {
+		// ADD SCORE HERE
 
 		if (squish) {
 			Squish();
