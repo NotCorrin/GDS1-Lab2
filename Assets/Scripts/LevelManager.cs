@@ -8,21 +8,20 @@ public class LevelManager : Listener
     // Start is called before the first frame update
     [SerializeField] static protected Scene currentLevel;
 
-    void Awake()
+    void Start()
     {
         GameManager.AddListener(this);
-
     }
     
     static public void RestartLevel()
     {
-        SceneManager.LoadScene(currentLevel.buildIndex);
+        SceneManager.LoadScene("World");
     }
 
     public override void OnGameStart()
     {
-        SceneManager.LoadScene("World");
-        currentLevel = SceneManager.GetActiveScene();
+        //SceneManager.LoadScene("World");
+        //currentLevel = SceneManager.GetActiveScene();
     }
 
     public override void OnGameReset()

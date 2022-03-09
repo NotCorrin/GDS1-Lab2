@@ -134,6 +134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1db75266e2460164dbcaec5d6abf6cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: 3821838250421723463}
   exploson: {fileID: 1732066128033158793, guid: cdba569c7da049242bbf3d5d8ba1820b, type: 3}
   velocity: {x: 0, y: 5}

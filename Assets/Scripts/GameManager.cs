@@ -146,7 +146,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ResetGame();
+        Lives = 3;
+        StartGame();
     }
 
     // Update is called once per frame
@@ -303,7 +304,7 @@ public class GameManager : MonoBehaviour
     {
         CurrentPlayerState = PlayerState.dead;
 
-        PauseGame();
+        //PauseGame();
     }
 
     public static void ResetPlayer()

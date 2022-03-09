@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMove : Listener
@@ -26,21 +27,31 @@ public class PlayerMove : Listener
     // Start is called before the first frame update
     public override void OnPlayerStateChanged()
     {
-        if(GameManager.CurrentPlayerState == GameManager.PlayerState.normal) Shrink();
+        if(GameManager.CurrentPlayerState == GameManager.PlayerState.dead) 
+        {
+            GameManager.ResetPlayer(); 
+            SceneManager.LoadScene(1);
+        }
+        else if(GameManager.CurrentPlayerState == GameManager.PlayerState.normal) Shrink();
         else Grow();
     }
+
     void Grow()
     {
         col.size = new Vector2(1,2);
+
         anim.SetInteger("size", (int)GameManager.CurrentPlayerState);
         anim.SetTrigger("Grow");
-    }    
+    }   
+
     void Shrink()
     {
         col.size = Vector2.one;
+
         anim.SetInteger("size", (int)GameManager.CurrentPlayerState);
         anim.SetTrigger("Shrink");
     }
+
     void Awake()
     {
         GameManager.AddListener(this);
@@ -48,11 +59,13 @@ public class PlayerMove : Listener
         col.size = GameManager.CurrentPlayerState == GameManager.PlayerState.normal?Vector2.one:new Vector2(1,2);
         anim.SetInteger("size", (int)GameManager.CurrentPlayerState);
     }
+
     void Start()
     {
         //GameManager.listenerList.Add(this);
         GameManager.AddListener(this);
     }
+
     void Update()
     {
         if(isLocked) 
@@ -64,7 +77,6 @@ public class PlayerMove : Listener
             }
             else 
             {
-                rb.velocity = Vector2.zero; 
                 rb.gravityScale = 0;
             }
             return;
@@ -107,6 +119,7 @@ public class PlayerMove : Listener
         if(Input.GetKeyDown(KeyCode.Alpha1)) Grow();
         if(Input.GetKeyDown(KeyCode.Alpha2)) Shrink();
     }
+
     void LateUpdate()
     {
         Vector3 pos = transform.position;
@@ -128,6 +141,8 @@ public class PlayerMove : Listener
         rend.flipX = !facing;
         anim.SetFloat("xspeed", Mathf.Abs(rb.velocity.x)/2);
         anim.SetBool("isSliding", Mathf.Sign(rb.velocity.x) == -move && Mathf.Abs(rb.velocity.x) > 1.5f);
+
+        if(transform.position.y < -6) SceneManager.LoadScene(1);
     }
 
     void Jump()

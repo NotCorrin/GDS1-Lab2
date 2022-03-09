@@ -35,6 +35,7 @@ public class Flag : MonoBehaviour
             target = pm;
             offset = child.position.y - other.transform.position.y;
             GameManager.Score += scoreValues[Mathf.FloorToInt(((other.transform.position.y - flagBottom) / flagTop) * scoreValues.Length)];  
+            pm.rb.velocity = Vector2.zero; 
         }
     }
     void OnDrawGizmos()
