@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 1941842948}
   m_Layer: 6
   m_Name: Mario
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32471f4c44c9551488494c7d96820eef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpspeed: 8
+  jumpspeed: 13.5
   acc: 25
   maxfallspeed: 20
   speed: 5

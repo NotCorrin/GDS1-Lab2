@@ -84,8 +84,9 @@ public class PlayerMove : Listener
         }
 
         //jump
-        if(Input.GetKeyDown(KeyCode.W) && grounded == true)
+        if(Input.GetKeyDown(KeyCode.W) && (grounded == true) && rb.velocity.y > -0.5f)
         {
+            Debug.Log(rb.velocity.y);
             rb.AddForce((jumpspeed + Mathf.Pow(Mathf.Abs(rb.velocity.x), 1.6f)) * Vector2.up * 0.5f, ForceMode2D.Impulse);
             Invoke("Jump", Time.deltaTime);
             grounded = false;
@@ -129,12 +130,16 @@ public class PlayerMove : Listener
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject.name);
         if(collision.gameObject.name == "Fireball(Clone)") return;
         if(isLocked) runaway = true;
-        float height = collision.contacts[1].point.y;
-        if (collision.contacts[0].point.y == height && height < transform.position.y)
+        float height = Mathf.FloorToInt(collision.contacts[1].point.y*1000)/1000f;
+        Debug.Log(Mathf.FloorToInt(collision.contacts[0].point.y*1000)/1000f);
+        Debug.Log(Mathf.FloorToInt(collision.contacts[1].point.y*1000)/1000f);
+        Debug.Log(Mathf.FloorToInt(collision.contacts[0].point.y*1000)/1000f == height);
+        Debug.Log(height);
+        if (Mathf.FloorToInt(collision.contacts[0].point.y*1000)/1000f == Mathf.FloorToInt(collision.contacts[1].point.y*1000)/1000f && height < transform.position.y + 0.1f)
         {
+            Debug.Log(collision.gameObject.name);
             grounded = true;
             anim.SetBool("isJumping", false);
         }
