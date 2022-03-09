@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 5406957151142960621}
   - component: {fileID: 5406957151142960622}
   - component: {fileID: 5406957151142960619}
-  - component: {fileID: 5406957151142960620}
   - component: {fileID: 5406957151142960618}
+  - component: {fileID: 4522763356100951646}
   m_Layer: 0
-  m_Name: Invisible Block
+  m_Name: ItemBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 454817e5e74a38841b4f071bcf9cd930, type: 3}
+  m_Sprite: {fileID: 4977970841946464033, guid: 68366e0adfd09694e98f6d86d68f14d1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -111,20 +111,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5406957151142960620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5406957151142960623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac78fbb2730bab24da76d0ccb1704ea1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  newSprite: {fileID: 21300000, guid: 454817e5e74a38841b4f071bcf9cd930, type: 3}
-  numHit: 1
 --- !u!95 &5406957151142960618
 Animator:
   serializedVersion: 3
@@ -144,3 +130,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4522763356100951646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5406957151142960623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 268d581f6fb880c49961519f7fd3d7f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 5406957151142960618}
+  newSprite: {fileID: 21300000, guid: b11be76d5818618458bdf930d17f87ef, type: 3}

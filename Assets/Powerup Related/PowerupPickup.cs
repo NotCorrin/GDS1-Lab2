@@ -36,7 +36,7 @@ public class PowerupPickup : MonoBehaviour
         if (collision.gameObject.tag == "OneUp")
         {
             Destroy(collision.gameObject);
-            GameManager.PickUpOneUp();
+            GameManager.Lives++;
         }
 
         if (collision.gameObject.tag == "Star")
