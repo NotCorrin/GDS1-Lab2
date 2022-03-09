@@ -9,10 +9,8 @@ public class CoinBlock : Block
 
     // Start is called before the first frame update
 
-    protected override void Start()
+    void Start()
     {
-        base.Start();
-
         coinAnim = GameObject.Find("CB Coin").GetComponent<Animator>();
     }
 
@@ -20,7 +18,11 @@ public class CoinBlock : Block
 
     protected override void ActivateBlock()
     {
-        StartCoroutine(RecoilCoin());
+        //StartCoroutine(RecoilCoin());
+
+        coinAnim.SetTrigger("recoil");
+
+        Debug.Log("Coin Block Activated");
 
         GameManager.Coins++;
 
@@ -32,15 +34,6 @@ public class CoinBlock : Block
     protected override bool IsValid()
     {
         return numCoins > 0;
-    }
-
-    IEnumerator RecoilCoin()     //makes coin appear when coin block is hit
-    {
-        coinAnim.SetBool("recoil", true);
-
-        yield return new WaitForSeconds(0.2f);
-
-        coinAnim.SetBool("recoil", false);
     }
 
 }
