@@ -13,7 +13,9 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private Rigidbody2D rb;
     [SerializeField]
-    private SpriteRenderer rend;
+    private SpriteRenderer rend;    
+    [SerializeField]
+    private Animator anim;
     private bool capoff;
     private bool facing;
     public float someRadius = 0.5f;
@@ -36,7 +38,7 @@ public class PlayerMove : MonoBehaviour
             {
                 //rb.velocity -= Mathf.Sign(rb.velocity.x) * acc * 0.5f * Vector2.right;
                 if(Mathf.Abs(rb.velocity.x) < 0.1f) rb.velocity = Vector2.zero; //stop moving
-                rb.AddForce(Mathf.Sign(rb.velocity.x) * acc * 0.5f * Vector2.left); //go back
+                rb.AddForce(Mathf.Sign(rb.velocity.x) * (acc-Mathf.Abs(rb.velocity.x)) * 0.15f * Vector2.left); //go back
                 if(Mathf.Abs(rb.velocity.x) < 0.1f) rb.velocity = Vector2.zero; //please for the love of god stop
             }
         }
@@ -47,6 +49,7 @@ public class PlayerMove : MonoBehaviour
             rb.AddForce((jumpspeed + Mathf.Pow(Mathf.Abs(rb.velocity.x), 1.6f)) * Vector2.up * 0.5f, ForceMode2D.Impulse);
             Invoke("Jump", Time.deltaTime);
             grounded = false;
+            anim.SetBool("isJumping", true);
         }
         if((Input.GetKeyUp(KeyCode.W) || rb.velocity.y < 0) && grounded == false) capoff = true;
         if(capoff) {
@@ -72,8 +75,12 @@ public class PlayerMove : MonoBehaviour
 
         transform.position = pos;
 
+        //Animation
         rend.flipX = !facing;
+        anim.SetFloat("xspeed", Mathf.Abs(rb.velocity.x));
+        anim.SetBool("isSliding", Mathf.Sign(rb.velocity.x) == -move && Mathf.Abs(rb.velocity.x) > 1.5f);
     }
+
     void Jump()
     {
         rb.AddForce((jumpspeed + Mathf.Pow(Mathf.Abs(rb.velocity.x), 1.6f)) * Vector2.up * 0.5f, ForceMode2D.Impulse);
@@ -84,6 +91,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.contacts[0].point.y == height && height < transform.position.y)
         {
             grounded = true;
+            anim.SetBool("isJumping", false);
         }
         capoff = false;
     }
