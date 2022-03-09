@@ -18,8 +18,8 @@ public abstract class Enemy : MonoBehaviour {
 
     protected bool facingLeft;
     protected bool activated = false;
-    private float turnCheckRange = 0.05f;
-    private float edgeCheckRange = 0.05f;
+    private float turnCheckRange = 0.019f;
+    private float edgeCheckRange = 0.019f;
     private float distToCamera;
 
     [Space]
