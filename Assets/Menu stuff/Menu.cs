@@ -16,7 +16,7 @@ public class Menu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
             //change to appropriate scene
         }
     }
