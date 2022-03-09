@@ -41,7 +41,7 @@ public class KoopaTroopa : Enemy
 		base.Move();
 	}
 
-	protected override void OnHit() {
+	public override void OnHit() {
 		FallOffScreen();
 	}
 
