@@ -51,6 +51,11 @@ public class Listener : MonoBehaviour
 
     }
 
+    public virtual void OnGameResumed()
+    {
+
+    }
+
     public virtual void OnScoreChange()
     {
 
@@ -68,7 +73,7 @@ public class Listener : MonoBehaviour
 
     public virtual void OnCoinGet()
     {
-
+        
     }
 
     public virtual void OnPlayerStateChanged()
