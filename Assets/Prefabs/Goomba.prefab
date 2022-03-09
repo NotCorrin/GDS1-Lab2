@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2082540330142986580}
   - component: {fileID: 3977642587859617172}
   - component: {fileID: 4571487413144313415}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Goomba
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 0.6}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &3977642587859617172
 Rigidbody2D:
@@ -93,16 +93,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb7566743fa80e4ca46c493ebc0efce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 1.25
   runOffEdge: 1
   startFacingLeft: 1
   graphicsTransform: {fileID: 4897733136653859016}
   turnAroundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 384
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   turnAroundCheckPoint: {fileID: 5778034952804374665}
   edgeCheckPoint: {fileID: 4522306517201405136}
   distActivationFromCamera: 5
@@ -117,7 +117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4522306517201405136}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EdgeCheck
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
@@ -148,7 +148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4897733136653859016}
   - component: {fileID: 4351371213569017103}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,7 +164,7 @@ Transform:
   m_GameObject: {fileID: 6852421535840510713}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5778034952804374665}
   - {fileID: 4522306517201405136}
@@ -231,7 +231,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5778034952804374665}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TurnCheck
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}

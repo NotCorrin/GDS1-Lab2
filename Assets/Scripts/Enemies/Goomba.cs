@@ -36,7 +36,7 @@ public class Goomba : Enemy
 		isDead = true;
 		rb.velocity = Vector2.zero;
 
-		Destroy(gameObject, 1f);
+		Destroy(gameObject, .75f);
 	}
 
 	void OnCollisionEnter2D(Collision2D other) {
@@ -59,9 +59,9 @@ public class Goomba : Enemy
 
 	bool IsAbove(Transform player) {
 		// Check if the player above...
-		if(player.position.y > transform.position.y + 0.4f && 
-			player.position.x > transform.position.x - 0.5f &&
-			player.position.x < transform.position.x + 0.5f) {
+		if(player.position.y > transform.position.y + 0.25f && 
+			player.position.x > transform.position.x - 0.85f &&
+			player.position.x < transform.position.x + 0.85f) {
 			squish = true;
 			return true;
 		}
