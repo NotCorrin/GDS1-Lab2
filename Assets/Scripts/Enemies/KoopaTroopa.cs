@@ -110,8 +110,8 @@ public class KoopaTroopa : Enemy
 	bool IsAbove(Transform player) {
 		// Check if the player above...
 		if (player.position.y > transform.position.y + 0.15f &&
-			player.position.x > transform.position.x - 0.5f &&
-			player.position.x < transform.position.x + 0.5f) {
+			player.position.x > transform.position.x - 0.85f &&
+			player.position.x < transform.position.x + 0.85f) {
 			return true;
 		}
 		return false;
