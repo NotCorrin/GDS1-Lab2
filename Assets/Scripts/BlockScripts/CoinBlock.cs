@@ -5,14 +5,9 @@ using UnityEngine;
 public class CoinBlock : Block
 {
     [SerializeField] protected int numCoins = 13;
-    private Animator coinAnim;
+    [SerializeField] private Animator coinAnim;
 
     // Start is called before the first frame update
-
-    void Start()
-    {
-        coinAnim = GameObject.Find("CB Coin").GetComponent<Animator>();
-    }
 
     // Update is called once per frame
 
