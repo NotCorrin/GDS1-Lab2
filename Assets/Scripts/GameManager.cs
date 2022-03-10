@@ -235,7 +235,7 @@ public class GameManager : MonoBehaviour
         if (currentGameState == GameState.playing)
         {
             currentGameState = GameState.paused;
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
 
             foreach (Listener listener in listenerList)
             {

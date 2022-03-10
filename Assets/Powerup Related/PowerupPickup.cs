@@ -18,6 +18,7 @@ public class PowerupPickup : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("ligma");
         if (collision.gameObject.tag == "FireFlower")
         {
             Destroy(collision.gameObject);

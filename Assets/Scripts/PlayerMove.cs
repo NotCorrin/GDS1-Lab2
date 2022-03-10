@@ -72,6 +72,7 @@ public class PlayerMove : Listener
         {
             if(runaway) 
             {
+                GameManager.PauseGame();
                 rb.AddForce(1 * acc * Vector3.right * Time.deltaTime, ForceMode2D.Impulse);
                 rb.gravityScale = 1;
             }
@@ -142,7 +143,7 @@ public class PlayerMove : Listener
         anim.SetFloat("xspeed", Mathf.Abs(rb.velocity.x)/2);
         anim.SetBool("isSliding", Mathf.Sign(rb.velocity.x) == -move && Mathf.Abs(rb.velocity.x) > 1.5f);
 
-        if(transform.position.y < -6) SceneManager.LoadScene(1);
+        if(transform.position.y < -6 && !runaway) SceneManager.LoadScene(1);
     }
 
     void Jump()
